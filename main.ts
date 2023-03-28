@@ -16,6 +16,8 @@ radio.onReceivedNumber(function (receivedNumber) {
     }
 })
 let LightLevel = 0
+LightLevel = 128
+pins.analogWritePin(AnalogPin.P1, LightLevel)
 radio.setGroup(123)
 basic.forever(function () {
 	
