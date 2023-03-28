@@ -1,16 +1,22 @@
-let LightLevel = 0
-let SleepTime = 50
-basic.forever(function () {
-    LightLevel = 2
-    while (LightLevel < 1024) {
-        pins.analogWritePin(AnalogPin.P0, LightLevel - 1)
-        basic.pause(SleepTime)
+radio.onReceivedNumber(function (receivedNumber) {
+    if (receivedNumber == 1) {
         LightLevel = LightLevel * 1.41421356
+        if (LightLevel > 1023) {
+            LightLevel = 1023
+        }
+        pins.analogWritePin(AnalogPin.P1, LightLevel)
+    } else {
+        if (receivedNumber == 2) {
+            LightLevel = LightLevel / 1.41421356
+            if (LightLevel < 1) {
+                LightLevel = 1
+            }
+            pins.analogWritePin(AnalogPin.P1, LightLevel)
+        }
     }
-    LightLevel = 1024
-    while (LightLevel > 2) {
-        pins.analogWritePin(AnalogPin.P0, LightLevel * 1.41421356)
-        basic.pause(SleepTime)
-        LightLevel = LightLevel / 1.4142156
-    }
+})
+let LightLevel = 0
+radio.setGroup(123)
+basic.forever(function () {
+	
 })
