@@ -1,17 +1,29 @@
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 1) {
-        LightLevel = LightLevel * 1.41421356
-        if (LightLevel > 1023) {
-            LightLevel = 1023
-        }
-        pins.analogWritePin(AnalogPin.P1, LightLevel)
+        LightUP()
     } else if (receivedNumber == 2) {
-        LightLevel = LightLevel / 1.41421356
-        if (LightLevel < 1) {
-            LightLevel = 1
-        }
-        pins.analogWritePin(AnalogPin.P1, LightLevel)
+        LightDown()
     }
+})
+input.onButtonPressed(Button.A, function () {
+    LightUP()
+})
+function LightUP () {
+    LightLevel = LightLevel * 1.41421356
+    if (LightLevel > 1023) {
+        LightLevel = 1023
+    }
+    pins.analogWritePin(AnalogPin.P1, LightLevel)
+}
+function LightDown () {
+    LightLevel = LightLevel / 1.41421356
+    if (LightLevel < 1) {
+        LightLevel = 1
+    }
+    pins.analogWritePin(AnalogPin.P1, LightLevel)
+}
+input.onButtonPressed(Button.B, function () {
+    LightDown()
 })
 let LightLevel = 0
 LightLevel = 128
