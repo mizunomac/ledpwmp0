@@ -1,5 +1,5 @@
 {
-    "name": "LEDpwmSlave",
+    "name": "LEDpwmSlaveNeo",
     "description": "",
     "dependencies": {
         "core": "*",
